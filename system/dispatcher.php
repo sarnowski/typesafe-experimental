@@ -13,8 +13,8 @@ $BASEDIR = dirname(dirname(__FILE__));
 $manager = MobManagerImpl::create();
 $manager->addDirectory("$BASEDIR/system/core/events");
 $manager->addDirectory("$BASEDIR/system/core/injection");
-$manager->addDirectory("$BASEDIR/system/classes");
-$manager->addDirectory("$BASEDIR/classes");
+$manager->addDirectory("$BASEDIR/system/modules");
+$manager->addDirectory("$BASEDIR/modules");
 $manager->start();
 
 try {

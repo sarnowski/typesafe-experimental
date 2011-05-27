@@ -21,6 +21,12 @@ class RestDispatcher {
     var $mobManager;
 
     /**
+     * @inject
+     * @var EventManager
+     */
+    var $eventManager;
+
+    /**
      * Dispatches an incoming request.
      *
      * @return void
@@ -30,9 +36,17 @@ class RestDispatcher {
         foreach ($methods as $method) {
             if (preg_match('#'.$method['path'].'#', $_SERVER['REQUEST_URI'], $matches)) {
                 $instance = $this->mobManager->getMob($method['mob']);
-                echo $method['method']->invokeArgs($instance, $matches);
+                $this->eventManager->fire('request.before', $method);
+                $method['method']->invokeArgs($instance, $matches);
+                $this->eventManager->fire('request.after');
                 return;
             }
         }
     }
+
+    function __toString() {
+        return 'RestDispatcher';
+    }
+
+
 }

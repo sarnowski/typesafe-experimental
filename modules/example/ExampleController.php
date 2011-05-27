@@ -4,19 +4,23 @@
  * Welcome controller.
  *
  * @name
- * @path /user
  * @author Tobias Sarnowski
  */
 class ExampleController {
 
     /**
+     * @inject
+     * @var PhpRenderer
+     */
+    var $phpRenderer;
+
+    /**
      *
      * @GET
-     * @path /edit
      * @return string
      */
     public function welcome() {
-        return "welcome!";
+        $this->phpRenderer->render('views/welcome.xhtml');
     }
 
 }
